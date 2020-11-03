@@ -1,0 +1,10 @@
+C:\Users\User\source\repos\Bipit51\Bipit51\obj\Debug\Bipit51.csprojAssemblyReference.cache
+C:\Users\User\source\repos\Bipit51\Bipit51\obj\Debug\Bipit51.Form1.resources
+C:\Users\User\source\repos\Bipit51\Bipit51\obj\Debug\Bipit51.Properties.Resources.resources
+C:\Users\User\source\repos\Bipit51\Bipit51\obj\Debug\Bipit51.csproj.GenerateResource.cache
+C:\Users\User\source\repos\Bipit51\Bipit51\obj\Debug\Bipit51.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\Bipit51\Bipit51\bin\Debug\Bipit51.exe.config
+C:\Users\User\source\repos\Bipit51\Bipit51\bin\Debug\Bipit51.exe
+C:\Users\User\source\repos\Bipit51\Bipit51\bin\Debug\Bipit51.pdb
+C:\Users\User\source\repos\Bipit51\Bipit51\obj\Debug\Bipit51.exe
+C:\Users\User\source\repos\Bipit51\Bipit51\obj\Debug\Bipit51.pdb

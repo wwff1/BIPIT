@@ -1,0 +1,4 @@
+contract="ServiceReference1.IService1" 
+        Service1Client sessionClient = new Service1Client("NetTcpBinding_IService1");
+        static Uri address = new Uri("net.tcp://localhost:9733/Design_Time_Addresses/Service1/");
+        NetTcpBinding binding = new NetTcpBinding();
