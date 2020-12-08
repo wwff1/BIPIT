@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="389cb041-0dc0-44ef-9144-87cb6e3b0d5a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9001/Design_Time_Addresses/wcf_chat/ServiceChat/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="356e6fa1-ad2d-4530-843b-0daebf1ebe56" SourceId="1" SourceUrl="http://localhost:9001/Design_Time_Addresses/wcf_chat/ServiceChat/?xsd=xsd1" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="5bca408c-d285-4ef3-a30c-4fc8239d44b2" SourceId="1" SourceUrl="http://localhost:9001/Design_Time_Addresses/wcf_chat/ServiceChat/?xsd=xsd2" />
+    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="10304859-2768-4080-b5e1-40daf96cfdda" SourceId="1" SourceUrl="http://localhost:9001/Design_Time_Addresses/wcf_chat/ServiceChat/?disco" />
+    <MetadataFile FileName="item21.xsd" MetadataType="Schema" ID="fd9c862b-6fea-4942-aa6f-df709c91b7f6" SourceId="1" SourceUrl="http://localhost:9001/Design_Time_Addresses/wcf_chat/ServiceChat/?xsd=xsd0" />
+    <MetadataFile FileName="ServiceChat1.wsdl" MetadataType="Wsdl" ID="1d8d343a-9926-46be-9474-138c906d6c1f" SourceId="1" SourceUrl="http://localhost:9001/Design_Time_Addresses/wcf_chat/ServiceChat/?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
