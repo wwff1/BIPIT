@@ -1,0 +1,121 @@
+﻿<div id="tableBlock"></div>
+<div id="createBlock">
+    <h3>Добавление заказа</h3>
+    <table>
+        <tr><td><label>№ клиента: </label></td><td><input type="number" id="ClientId" /></td></tr>
+        <tr><td><label>№ автобуса: </label></td><td><input type="number" id="BusId" /></td></tr>
+        <tr><td><label>Дата: </label></td><td><input type="date" value="2021-01-16" id="Date" /></td></tr>
+        <tr><td><label>Стоимость: </label></td><td><input type="number" value="1000" min="1" id="Cost" /></td></tr>
+    </table>
+    <button id="addOrder">Добавить</button>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            GetOrders();
+
+
+            $("#addOrder").click(function(event) {
+                event.preventDefault();
+                AddOrder();
+            });
+
+        });
+
+        // Получение всех книг по ajax-запросу
+        function GetOrders() {
+            $("#createBlock").css('display', 'block');
+            $.ajax({
+                url: '/api/GetOrders',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    WriteResponse(data);
+                },
+                error: function(x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+        // вывод полученных данных на экран
+        function WriteResponse(Order) {
+            var strResult = "<table><th>№ заказа</th><th>№ клиента</th><th>№ автобуса</th><th>Дата</th><th>Стоимость</th><th>Удаление</th>";
+            $.each(Order,
+                function (index, order) {
+                    var date = new Date(order.date);
+
+                    strResult += "<tr><td>" +
+                        order.id_Order +
+                        "</td><td> " +
+                        order.id_Client_FK +
+                        "</td><td>" +
+                        order.id_Bus_FK +
+                        "</td><td>" +
+                        date.getDate() + "." + date.getMonth() + "." + date.getFullYear() +
+                        "</td><td>" +
+                        order.cost +
+                        "<td><a id='delItem' data-item='" +
+                        order.id_Order +
+                        "' onclick='DeleteItem(this);' >Удалить</a></td></tr>";
+                });
+            strResult += "</table>";
+            $("#tableBlock").html(strResult);
+
+        }
+
+        // Добавление новой книги
+        function AddOrder() {
+            // получаем значения для добавляемой книги
+            var order = {
+                id_Client_FK: $('#ClientId').val(),
+                id_Bus_FK: $('#BusId').val(),
+                Date: $('#Date').val(),
+                Cost: $('#Cost').val()
+
+            };
+
+            $.ajax({
+                url: '/api/AddOrder',
+                type: 'POST',
+                data: JSON.stringify(order),
+                contentType: "application/json;charset=utf-8",
+                success: function(data) {
+                    GetOrders();
+                },
+                error: function(x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+        // Удаление книги
+        function DeleteBook(id) {
+
+            $.ajax({
+                url: '/api/DeleteOrder/' + id,
+                type: 'DELETE',
+                contentType: "application/json;charset=utf-8",
+                success: function(data) {
+                    GetOrders();
+                },
+                error: function(x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+
+        // обработчик удаления
+        function DeleteItem(el) {
+
+            // получаем id удаляемого объекта
+            var id = $(el).attr('data-item');
+            DeleteBook(id);
+        }
+
+
+    </script>
+}

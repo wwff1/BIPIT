@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Lab_9_MVC.Models.Order>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Аренда автобусов</h1><br/>
+    <h2>Реестр заказов</h2> 
+
+</div>
+
+<div class="row ">
+
+
+
+    <table class="table table-striped">
+        <tr>
+            <th>№ заказа</th>
+            <th>№ клиента</th>
+            <th>ФИО клиента</th>
+            <th>№ автобуса</th>
+            <th>Название автобуса</th>
+            <th>Дата</th>
+            <th>Стоимость</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_Order)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_Client_FK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.FIO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_Bus_FK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bus.Name_car)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cost)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

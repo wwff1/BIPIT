@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Lab_9_MVC.Models.Client>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Аренда автобусов</h1><br/>
+    <h2>@ViewBag.Message</h2> 
+
+</div>
+
+<div class="row ">
+
+
+    <table class="table table-striped">
+        <tr>
+            <th>№ клиента</th>
+            <th>ФИО</th>
+            <th>Телефон</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_Client)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FIO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TEL)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

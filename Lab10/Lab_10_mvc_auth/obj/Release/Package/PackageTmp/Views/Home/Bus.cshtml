@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Lab_10_mvc_auth.Models.Bus>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity
+
+<div class="jumbotron">
+    <h1>Аренда автобусов</h1><br />
+    <h2>@ViewBag.Message</h2>
+
+</div>
+
+<div class="row ">
+
+    <table class="table table-striped">
+        <tr>
+            <th>№ автобуса</th>
+            <th>Название автобуса</th>
+            <th>VIN</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_Bus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name_car)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VIN)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

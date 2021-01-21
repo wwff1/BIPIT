@@ -1,0 +1,111 @@
+﻿<div id="tableBlock"></div>
+<div id="createBlock">
+    <h3>Добавление клиента</h3>
+    <table>
+        <tr><td><label>ФИО клиента: </label></td><td><input type="text" id="ClientFIO" /></td></tr>
+        <tr><td><label>TEL: </label></td><td><input type="number" value="" id="TEL" /></td></tr>
+    </table>
+    <button id="addOrder">Добавить</button>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            GetClients();
+
+
+            $("#addOrder").click(function(event) {
+                event.preventDefault();
+                AddClient();
+            });
+
+        });
+
+        // Получение всех книг по ajax-запросу
+        function GetClients() {
+            $("#createBlock").css('display', 'block');
+            $.ajax({
+                url: '/api/GetClients',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    WriteResponse(data);
+                },
+                error: function(x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+        // вывод полученных данных на экран
+        function WriteResponse(Client) {
+            var strResult = "<table><th>№ клиента</th><th>ФИО</th><th>Телефон</th><th>Удаление</th>";
+            $.each(Client,
+                function (index, client) {
+
+                    strResult += "<tr><td>" +
+                        client.id_Client +
+                        "</td><td> " +
+                        client.FIO +
+                        "</td><td>" +
+                        client.TEL +
+                        "<td><a id='delItem' data-item='" +
+                        client.id_Client +
+                        "' onclick='DeleteItem(this);' >Удалить</a></td></tr>";
+                });
+            strResult += "</table>";
+            $("#tableBlock").html(strResult);
+
+        }
+
+        // Добавление новой книги
+        function AddClient() {
+            // получаем значения для добавляемой книги
+            var client = {
+                FIO: $('#ClientFIO').val(),
+                TEL: $('#TEL').val()
+            };
+
+            $.ajax({
+                url: '/api/AddClient',
+                type: 'POST',
+                data: JSON.stringify(client),
+                contentType: "application/json;charset=utf-8",
+                success: function(data) {
+                    GetClients();
+                },
+                error: function(x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+        // Удаление книги
+        function DeleteBook(id) {
+
+            $.ajax({
+                url: '/api/DeleteClient/' + id,
+                type: 'DELETE',
+                contentType: "application/json;charset=utf-8",
+                success: function(data) {
+                    GetClients();
+                },
+                error: function(x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+
+        // обработчик удаления
+        function DeleteItem(el) {
+
+            // получаем id удаляемого объекта
+            var id = $(el).attr('data-item');
+            DeleteBook(id);
+        }
+
+
+    </script>
+}

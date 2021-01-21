@@ -1,0 +1,196 @@
+﻿@* @model IEnumerable<Lab_10_mvc_auth.Models.Order> *@
+@{
+    var orders = ViewData["Order"] as IEnumerable<Order>;
+}
+@model Lab_10_mvc_auth.Models.Order
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Lab_10_mvc_auth.Models
+@using Microsoft.AspNet.Identity
+
+
+<div class="jumbotron">
+    <h1>Аренда автобусов</h1><br />
+    <h2>Реестр заказов</h2>
+
+</div>
+
+<div class="row ">
+
+    <table class="table table-striped">
+        <tr>
+            <th>№ заказа</th>
+            <th>№ клиента</th>
+            <th>ФИО клиента</th>
+            <th>№ автобуса</th>
+            <th>Название автобуса</th>
+            <th>Дата</th>
+            <th>Стоимость</th>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th>Удаление</th>
+            }
+        </tr>
+
+        @foreach (var item in orders)
+        {
+            <tr>
+                <td>
+                    @item.id_Order
+                </td>
+                <td>
+                    @item.id_Client_FK
+                </td>
+                <td>
+                    @item.Client.FIO
+                </td>
+                <td>
+                    @item.id_Bus_FK
+                </td>
+                <td>
+                    @item.Bus.Name_car
+                </td>
+                <td>
+                    @item.date.Value.ToString("dd.MM.yyyy")
+                </td>
+                <td>
+                    @item.cost
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Home", new { id = item.id_Order }, null)
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+
+@if (Request.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-xs-6">
+            Добавление
+            @using (Html.BeginForm("Add_order", "Home", FormMethod.Post, new {@class = "mt-3"}))
+            {
+
+                <input class="form-control" type="text" style="display: none;" readonly="true" name="id_client" id="id_client" value="1">
+
+                <div class=" form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Клиент</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.id_Client_FK, ViewBag.Clients as SelectList, new {@name = "client", @id = "client", @class = "form-control"})
+                    </div>
+                </div>
+                <input class="form-control" type="text" style="display: none;" readonly="true" name="id_bus" id="id_bus" value="1">
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Автобус</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.id_Bus_FK, ViewBag.Bus as SelectList, new {@name = "bus", @id = "bus", @class = "form-control"})
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Дата заказа</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="date" name="date" id="date" value="2021-01-15">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Цена</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="number" name="cost" id="cost" value="1000">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <button>Добавить</button>
+                </div>
+            }
+        </div>
+        <div class="col-xs-6">
+            Редактирование
+            @using (Html.BeginForm("Change_order", "Home", FormMethod.Post, new {@class = "mt-3"}))
+            {
+                <input class="form-control" type="text" style="display: none;" readonly="true" required name="id_Order_edit" id="id_Order_edit" value="1">
+
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3">ID</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.id_Order, ViewBag.Orders as SelectList,
+                            new {@name = "Order_edit", @id = "Order_edit", @class = "form-control"})
+                    </div>
+                </div>
+                <input class="form-control" type="text" style="display: none;" readonly="true" name="id_client_edit" id="id_client_edit" value="1">
+
+                <div class=" form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Клиент</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.id_Client_FK, ViewBag.Clients as SelectList,
+                            new {@name = "client_edit", @id = "client_edit", @class = "form-control"})
+                    </div>
+                </div>
+                <input class="form-control" type="text" style="display: none;" readonly="true" name="id_bus_edit" id="id_bus_edit" value="1">
+
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Автобус</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(model => model.id_Bus_FK, ViewBag.Bus as SelectList,
+                            new {@name = "bus_edit", @id = "bus_edit", @class = "form-control"})
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3 col-form-label">Дата заказа</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="date" name="date_edit" id="date_edit" value="2021-01-15">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="name" class="col-sm-3">Цена</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="number" required name="cost_edit" id="cost_edit" value="1000">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <button value="Edit">Сохранить</button>
+                </div>
+            }
+        </div>
+    </div>
+}
+@section scripts{
+    <script>
+        $("#Order_edit").change(function () {
+            var order_edit = document.getElementById("Order_edit");
+            var id_order_edit = order_edit.value;
+            $("#id_Order_edit").val(id_order_edit);
+        });
+        $("#client_edit").change(function () {
+            var client_edit = document.getElementById("client_edit");
+            var id_client_edit = client_edit.value;
+            $("#id_client_edit").val(id_client_edit);
+        });
+        $("#bus_edit").change(function () {
+            var bus_edit = document.getElementById("bus_edit");
+            var id_bus_edit = bus_edit.value;
+            $("#id_bus_edit").val(id_bus_edit);
+        });
+        $("#client").change(function () {
+            var client = document.getElementById("client");
+            var id_client = client.value;
+            $("#id_client").val(id_client);
+        });
+        $("#bus").change(function () {
+            var bus = document.getElementById("bus");
+            var id_bus = bus.value;
+            $("#id_bus").val(id_bus);
+        });
+    </script>
+}

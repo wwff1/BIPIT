@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище RentBusModelContainer" CdmEntityContainer="RentBusEntities">
+    <EntitySetMapping Name="Bus">
+      <EntityTypeMapping TypeName="RentBusModel.Bus">
+        <MappingFragment StoreEntitySet="Bus">
+          <ScalarProperty Name="id_Bus" ColumnName="id_Bus" />
+          <ScalarProperty Name="Name_car" ColumnName="Name_car" />
+          <ScalarProperty Name="VIN" ColumnName="VIN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="RentBusModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="id_Client" ColumnName="id_Client" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="TEL" ColumnName="TEL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="RentBusModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="id_Order" ColumnName="id_Order" />
+          <ScalarProperty Name="id_Client_FK" ColumnName="id_Client_FK" />
+          <ScalarProperty Name="id_Bus_FK" ColumnName="id_Bus_FK" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="cost" ColumnName="cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
